@@ -28,10 +28,15 @@ export default function Home() {
       if (!response.ok) {
         setError(data.error || 'An error occurred');
       } else {
-        setResult(data);
+        // Validate that we have a summary array
+        if (data && data.summary && Array.isArray(data.summary) && data.summary.length > 0) {
+          setResult(data);
+        } else {
+          setError('Invalid response format. Please check the API configuration.');
+        }
       }
     } catch (err) {
-      setError('Failed to connect to the API');
+      setError('Failed to connect to the API. Please check your connection and try again.');
     } finally {
       setLoading(false);
     }
@@ -98,13 +103,13 @@ export default function Home() {
           <div className="text-left mt-4">
             <p className="mb-2"><strong>Request:</strong></p>
             <pre className="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto text-sm">
-{`{
-  "topic": "direct-to-consumer coffee brands"
-}`}
+{JSON.stringify({ topic: topic || "direct-to-consumer coffee brands" }, null, 2)}
             </pre>
             <p className="mb-2 mt-4"><strong>Response:</strong></p>
             <pre className="bg-gray-800 text-green-400 p-4 rounded overflow-x-auto text-sm">
-{`{
+{result 
+  ? JSON.stringify(result, null, 2)
+  : `{
   "summary": [
     "Point 1...",
     "Point 2...",

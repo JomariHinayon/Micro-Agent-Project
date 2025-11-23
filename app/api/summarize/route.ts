@@ -17,7 +17,6 @@ export async function POST(request: NextRequest) {
     }
 
     if (!process.env.OPENAI_API_KEY) {
-      console.error('OPENAI_API_KEY is not configured');
       return NextResponse.json(
         {
           error: 'Server configuration error. OpenAI API key is missing.',
@@ -27,9 +26,19 @@ export async function POST(request: NextRequest) {
     }
 
     const result = await generateBusinessStrategy(body.topic.trim());
+    
+    // Validate the result structure
+    if (!result || !result.summary || !Array.isArray(result.summary) || result.summary.length === 0) {
+      return NextResponse.json(
+        {
+          error: 'Failed to generate valid strategy points. Please try again.',
+        },
+        { status: 500 }
+      );
+    }
+    
     return NextResponse.json(result, { status: 200 });
   } catch (error) {
-    console.error('API Error:', error);
 
     if (error instanceof Error) {
       if (error.message.includes('API key')) {
