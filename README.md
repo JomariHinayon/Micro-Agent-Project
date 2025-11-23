@@ -2,7 +2,7 @@
 
 A micro-agent API that generates three-point business strategy summaries for any given topic. Built with Next.js, TypeScript, and OpenAI.
 
- **Live Demo:** [https://micro-agent-project-f8elcupid-jomaris-projects-778441b5.vercel.app/](https://micro-agent-project-f8elcupid-jomaris-projects-778441b5.vercel.app/)
+ **Live Demo:** [https://micro-agent-project.vercel.app/](https://micro-agent-project.vercel.app/)
 
  **Repository:** [https://github.com/JomariHinayon/Micro-Agent-Project](https://github.com/JomariHinayon/Micro-Agent-Project)
 
@@ -72,14 +72,3 @@ The application exposes a POST endpoint that accepts JSON requests. You send a r
 **Note:** The example above is just a template showing the response format. When you actually use the API or web interface, you'll receive **real, AI-generated strategy points** based on your specific topic. The generated content appears at the top of the page in a green box when using the web interface.
 
 The application works by taking your topic, sending it to OpenAI's API with instructions to generate business strategy insights, and then formatting the AI's response into three distinct, actionable strategy points that are returned to you.
-
-## Deployment
-
-This project is deployed on Vercel. To deploy your own instance:
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Add your `OPENAI_API_KEY` as an environment variable in Vercel's project settings
-4. Vercel will automatically build and deploy your application
-
-**Note:** You don't need to run `npm run build` locally before deploying. Vercel automatically runs the build process during deployment.
